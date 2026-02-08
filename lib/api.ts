@@ -24,19 +24,21 @@ export interface FetchNotesParams {
 export async function fetchNotes(
   params: FetchNotesParams,
 ): Promise<FetchNotesResponse> {
-  const response = await api.get("/notes", {
+  const response = await api.get<FetchNotesResponse>("/notes", {
     params,
   });
   return response.data;
 }
 
-export async function fetchNotebyId(id: Note["id"]) {
+export async function fetchNoteById(id: Note["id"]) {
   const response = await api.get<Note>(`/notes/${id}`);
 
   return response.data;
 }
 
-export async function createNote(newTask: Note) {
+export async function createNote(
+  newTask: Omit<Note, "id" | "createdAt" | "updatedAt">,
+) {
   const response = await api.post<Note>("/notes", newTask);
   return response.data;
 }

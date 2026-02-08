@@ -3,14 +3,15 @@
 import { useParams } from "next/navigation";
 import css from "./NoteDetails.module.css";
 import { useQuery } from "@tanstack/react-query";
-import { fetchNotebyId } from "@/lib/api";
+import { fetchNoteById } from "@/lib/api";
 
 export default function NoteDetailsClient() {
   const { id } = useParams<{ id: string }>();
 
   const { data, isError, isLoading } = useQuery({
     queryKey: ["note", id],
-    queryFn: () => fetchNotebyId(id),
+    queryFn: () => fetchNoteById(id),
+    refetchOnMount: false,
   });
   return (
     <>
