@@ -30,7 +30,7 @@ export async function fetchNotes(
   return response.data;
 }
 
-export async function fetchNotesbyId(id: Note["id"]) {
+export async function fetchNotebyId(id: Note["id"]) {
   const response = await api.get<Note>(`/notes/${id}`);
 
   return response.data;

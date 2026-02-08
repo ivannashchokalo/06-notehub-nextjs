@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import NoteDetailsClient from "./NoteDetails.client";
-import { fetchNotesbyId } from "@/lib/api";
+import { fetchNotebyId } from "@/lib/api";
 
 interface NoteDetailsProps {
   params: Promise<{ id: string }>;
@@ -17,7 +17,7 @@ export default async function NoteDetails({ params }: NoteDetailsProps) {
 
   await queryClient.prefetchQuery({
     queryKey: ["note", id],
-    queryFn: () => fetchNotesbyId(id),
+    queryFn: () => fetchNotebyId(id),
   });
 
   return (
