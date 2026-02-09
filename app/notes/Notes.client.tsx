@@ -8,6 +8,7 @@ import SearchBox from "@/components/SearchBox/SearchBox";
 import { useDebouncedCallback } from "use-debounce";
 import NoteList from "@/components/NoteList/NoteList";
 import Modal from "@/components/Modal/Modal";
+import NoteForm from "@/components/NoteForm/NoteForm";
 
 export default function NotesClient() {
   const [page, setPage] = useState(1);
@@ -54,7 +55,11 @@ export default function NotesClient() {
         </button>
       </div>
       {data && data.notes.length > 0 && <NoteList notes={data.notes} />}
-      {isModalOpen && <Modal onCloseModal={closeModal} />}
+      {isModalOpen && (
+        <Modal onCloseModal={closeModal}>
+          <NoteForm onCloseModal={closeModal} />
+        </Modal>
+      )}
     </>
   );
 }

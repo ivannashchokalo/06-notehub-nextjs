@@ -35,9 +35,12 @@ export default function NoteForm({ onCloseModal }: NoteFormProps) {
     value: FormValues,
     actions: FormikHelpers<FormValues>,
   ) => {
-    createMutation.mutate(value);
-    actions.resetForm();
-    onCloseModal();
+    createMutation.mutate(value, {
+      onSuccess: () => {
+        actions.resetForm();
+        onCloseModal();
+      },
+    });
   };
 
   const createMutation = useMutation({
