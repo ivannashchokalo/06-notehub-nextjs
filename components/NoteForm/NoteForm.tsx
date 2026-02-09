@@ -3,20 +3,14 @@ import css from "./NoteForm.module.css";
 import { useId } from "react";
 import * as Yup from "yup";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Note } from "../../types/note";
+import { FormValues } from "../../types/note";
 import { createNote } from "@/lib/api";
 
 interface NoteFormProps {
   onCloseModal: () => void;
 }
 
-interface FormValues {
-  title: string;
-  content: string;
-  tag: string;
-}
-
-const initialValues = {
+const initialValues: FormValues = {
   title: "",
   content: "",
   tag: "Todo",
@@ -38,7 +32,7 @@ export default function NoteForm({ onCloseModal }: NoteFormProps) {
   const queryClient = useQueryClient();
 
   const handleFormSubmit = (
-    value: Note,
+    value: FormValues,
     actions: FormikHelpers<FormValues>,
   ) => {
     createMutation.mutate(value);
@@ -47,7 +41,7 @@ export default function NoteForm({ onCloseModal }: NoteFormProps) {
   };
 
   const createMutation = useMutation({
-    mutationFn: (value: Note) => createNote(value),
+    mutationFn: (value: FormValues) => createNote(value),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
     },

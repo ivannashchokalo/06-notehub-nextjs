@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Note } from "../types/note";
+import { FormValues, Note } from "../types/note";
 
 const API_KEY = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
@@ -36,9 +36,7 @@ export async function fetchNoteById(id: Note["id"]) {
   return response.data;
 }
 
-export async function createNote(
-  newTask: Omit<Note, "id" | "createdAt" | "updatedAt">,
-) {
+export async function createNote(newTask: FormValues) {
   const response = await api.post<Note>("/notes", newTask);
   return response.data;
 }
