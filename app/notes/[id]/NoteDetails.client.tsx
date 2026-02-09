@@ -25,7 +25,7 @@ export default function NoteDetailsClient() {
             </div>
             <p className={css.tag}>{data.tag}</p>
             <p className={css.content}>{data.content}</p>
-            <p className={css.date}>Created date</p>
+            <p className={css.date}>{data.createdAt}</p>
           </div>
         </div>
       )}
